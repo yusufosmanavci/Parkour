@@ -667,11 +667,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc66e241f64c53d45975e3ddf99d6372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  walkSpeed: 5
+  sprintSpeed: 8
+  crouchSpeed: 2.5
   gravity: -9.81
+  jumpHeight: 1.5
   playerCamera: {fileID: 113579886}
   mouseSensitivity: 2
   verticalLookLimit: 90
+  crouchHeight: 1
+  standingHeight: 2
+  crouchTransitionSpeed: 8
+  slideDuration: 0.8
+  slideSpeed: 20
+  slideSpeedOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.020000458
+      value: 0.99905396
+      inSlope: -0.9882385
+      outSlope: -0.9882385
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.98999023
+      value: 0.0009422302
+      inSlope: -0.9882385
+      outSlope: -0.9882385
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!143 &783029269
 CharacterController:
   m_ObjectHideFlags: 0
