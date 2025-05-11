@@ -11,6 +11,9 @@ public class InputHandler : MonoBehaviour
     private ICommand moveRight;
     private ICommand jumpCommand;
     private ICommand runCommand;
+    private ICommand crouchCommand;
+    private ICommand slideCommand;
+    private ICommand grappleCommand;
 
     private PlayerMovement playerMovement;
 
@@ -25,6 +28,12 @@ public class InputHandler : MonoBehaviour
 
         jumpCommand = new JumpCommand(GetComponent<Rigidbody>(), jumpForce);
         runCommand = new RunCommand(playerMovement);
+
+        var rb = GetComponent<Rigidbody>();
+
+        crouchCommand = new CrouchCommand(transform);
+        slideCommand = new SlideCommand(rb, transform);
+        // grappleCommand her seferinde hedefe göre oluþturulmalý
     }
 
     void Update()
@@ -38,5 +47,21 @@ public class InputHandler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) runCommand.Execute();
         if (Input.GetKeyUp(KeyCode.LeftShift)) runCommand.Undo();
+
+        if (Input.GetKeyDown(KeyCode.LeftControl)) crouchCommand.Execute();
+        if (Input.GetKeyUp(KeyCode.LeftControl)) crouchCommand.Undo();
+
+        if (Input.GetKeyDown(KeyCode.C)) slideCommand.Execute();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Rigidbody rb = GetComponent<Rigidbody>();
+                grappleCommand = new GrappleCommand(rb, hit.point);
+                grappleCommand.Execute();
+            }
+        }
     }
 }
