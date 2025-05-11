@@ -11,7 +11,6 @@ public class InputHandler : MonoBehaviour
     private ICommand moveRight;
     private ICommand jumpCommand;
     private ICommand runCommand;
-    private ICommand attackCommand;
 
     private PlayerMovement playerMovement;
 
@@ -26,7 +25,6 @@ public class InputHandler : MonoBehaviour
 
         jumpCommand = new JumpCommand(GetComponent<Rigidbody>(), jumpForce);
         runCommand = new RunCommand(playerMovement);
-        attackCommand = new AttackCommand(GetComponent<Animator>());
     }
 
     void Update()
@@ -37,7 +35,6 @@ public class InputHandler : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) moveRight.Execute();
 
         if (Input.GetKeyDown(KeyCode.Space)) jumpCommand.Execute();
-        if (Input.GetKeyDown(KeyCode.Mouse0)) attackCommand.Execute(); // Sol týk saldýrý
 
         if (Input.GetKeyDown(KeyCode.LeftShift)) runCommand.Execute();
         if (Input.GetKeyUp(KeyCode.LeftShift)) runCommand.Undo();
